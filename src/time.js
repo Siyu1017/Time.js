@@ -45,7 +45,7 @@ const checkParamType = (value, type) => {
     var res = false;
     if (Array.isArray(type) == true) {
         type.forEach(t => {
-            if (typeof value === type) {
+            if (typeof value === t) {
                 res = true;
             }
         })
@@ -81,11 +81,7 @@ class Time {
         if (type == "datetime") {
             // 參數 type 為 datetime 時，可為數字或字串
             if (checkParamType(value, paramTypes["value"]) == false) return console.warn("Parameter value must be of type string or number.");
-            try {
-                new Date(value);
-            } catch (e) {
-                return console.warn("Invalid datetime.");
-            }
+            if (new Date(value).toString() == "Invalid Date") return console.warn("Invalid datetime.");
 
             // 檢測完畢
         } else if (type == "word") {
@@ -95,12 +91,15 @@ class Time {
             if (checkParamType(value, paramTypes["value"][1]) == false) return console.warn("Parameter value must be of type string.");
 
             // 檢查值是否合法
-            if (valueWithWordPattern.indexOf(value) < 0) return console.warn("Param value ( ",value ,") is not a valid keyword");
+            if (valueWithWordPattern.indexOf(value) < 0) return console.warn("Param value (",value ,") is not a valid keyword");
 
             // value 為 next 或 last 時
             if (valueWithWordAndAmount.indexOf(value) > -1) {
                 // 檢查 amount 類型
                 if (checkParamType(amount, paramTypes["amount"]) == false) return console.warn("Parameter amount must be of type number.");
+
+                // 大於 0
+                if (!amount > 0) return console.warn("The parameter amount must be a number greater than 0.");
 
                 // 檢查 unit 類型
                 if (checkParamType(unit, paramTypes["unit"]) == false) return console.warn("Parameter unit must be of type string.");
