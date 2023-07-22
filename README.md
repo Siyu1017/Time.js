@@ -29,6 +29,12 @@ new Time("word", "last", 1, "year");
 new Time(type, value, amount, unit);
 ```
 
+| 參數名稱 |          類型        |                          屬性值                          |
+|:-------:|:--------------------:|:-------------------------------------------------------:|
+| `type`  |       `String`       |                   `datetime` 或 `word`                  |
+| `value` | `Number` 或 `String` | 日期 、`now`、`tomorrow`、`yesterday`、`next` 以及 `last` |
+
+
 第一個參數 ( `type` ) 必填，須為字串 ( `String` )，屬性值：`datetime` 或 `word`
 
 第二個參數 ( `value` ) 必填 
