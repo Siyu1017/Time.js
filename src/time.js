@@ -14,14 +14,14 @@ const valueWithWordAndAmount = ["next", "last"];
 
 const unitPattern = {
     "second": 1000,
-    "minute": 1000*60,
-    "hour": 1000*60*60,
-    "day": 1000*60*60*24,
-    "week": 1000*60*60*24*7,
-    "month": [28, 29, 30, 31, 1000*60*60*24],
-    "season": [89, 90, 91, 92, 1000*60*60*24],
-    "year": [365, 366, 1000*60*60*24],
-    "century": 1000*60*60*24*365*100
+    "minute": 1000 * 60,
+    "hour": 1000 * 60 * 60,
+    "day": 1000 * 60 * 60 * 24,
+    "week": 1000 * 60 * 60 * 24 * 7,
+    "month": 1000 * 60 * 60 * 24 * 30,
+    "season": 1000 * 60 * 60 * 24 * 90,
+    "year": 1000 * 60 * 60 * 24 * 365,
+    "century": 1000 * 60 * 60 * 24 * 365 * 100
 }
 
 const wordPattern = {
@@ -83,6 +83,8 @@ class Time {
             if (checkParamType(value, paramTypes["value"]) == false) return console.warn("Parameter value must be of type string or number.");
             if (new Date(value).toString() == "Invalid Date") return console.warn("Invalid datetime.");
 
+            this.date = value;
+            return new Date(this.date);
             // 檢測完畢
         } else if (type == "word") {
             // 參數 type 為 word 時，為字串
@@ -91,7 +93,7 @@ class Time {
             if (checkParamType(value, paramTypes["value"][1]) == false) return console.warn("Parameter value must be of type string.");
 
             // 檢查值是否合法
-            if (valueWithWordPattern.indexOf(value) < 0) return console.warn("Param value (",value ,") is not a valid keyword");
+            if (valueWithWordPattern.indexOf(value) < 0) return console.warn("Param value (", value, ") is not a valid keyword");
 
             // value 為 next 或 last 時
             if (valueWithWordAndAmount.indexOf(value) > -1) {
@@ -108,8 +110,25 @@ class Time {
                 if (unitPattern.hasOwnProperty(unit) == false) return console.warn("Parameter unit is invalid.");
             }
 
+            if (value == "tomorrow" || value == "yesterday") {
+                this.date = this.now() + wordPattern[value];
+                return new Date(this.date);
+            } else if (value == "now") {
+                this.date = this.now();
+                return new Date(this.date);
+            } else {
+                this.date = this.now() + amount * unitPattern[unit] * operationPattern[value];
+                return new Date(this.date);
+            }
+
             // 檢測完畢
         }
+    }
+    now() {
+        return Date.now();
+    }
+    operation(operator, unit, value) {
+
     }
 }
 
