@@ -37,6 +37,6 @@ new Time(type, value, amount, unit);
 - `type` 為 `word`
     - 須為字串 ( `String` )，屬性值：`now`、`tomorrow`、`yesterday`、`next` 以及 `last`
 
-第三個參數 ( `amount` ) 選填，當參數 `value` 為 `next` 或 `last` 時才需填寫此屬性
+第三個參數 ( `amount` ) 選填，當參數 `value` 為 `next` 或 `last` 時才需填寫此屬性，須為數字 ( `Number` ) 
 
-第四個參數 ( `unit` ) 選填，當參數 `value` 為 `next` 或 `last` 時才需填寫此屬性，屬性值：`second`、`minute`、`hour`、`day`、`week`、`month`、`season`、`year` 以及 `century`
+第四個參數 ( `unit` ) 選填，當參數 `value` 為 `next` 或 `last` 時才需填寫此屬性，須為字串 ( `String` )，屬性值：`second`、`minute`、`hour`、`day`、`week`、`month`、`season`、`year` 以及 `century`
