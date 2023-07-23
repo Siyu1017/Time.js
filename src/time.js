@@ -84,7 +84,6 @@ class Time {
             if (new Date(value).toString() == "Invalid Date") return console.warn("Invalid datetime.");
 
             this.date = value;
-            return new Date(this.date);
             // 檢測完畢
         } else if (type == "word") {
             // 參數 type 為 word 時，為字串
@@ -112,25 +111,35 @@ class Time {
 
             if (value == "tomorrow" || value == "yesterday") {
                 this.date = this.now() + wordPattern[value];
-                return new Date(this.date);
             } else if (value == "now") {
                 this.date = this.now();
-                return new Date(this.date);
             } else {
                 this.date = this.now() + amount * unitPattern[unit] * operationPattern[value];
-                return new Date(this.date);
             }
 
             // 檢測完畢
         }
+
+        return this;
     }
     now() {
         return Date.now();
     }
-    operation(operator, unit, value) {
-        const operators = ["+", "-", "*", "/", "%"];
+    operation(operator, unit, value, type = "date") {
+        const operators = ["+", "-", "*", "/"];
+        const types = ["date", "number"];
+        const conut = (v, o, c) => {
+            if (o == operators[0]) return c + v;
+            if (o == operators[1]) return c - v;
+            if (o == operators[2]) return c * v;
+            if (o == operators[3]) return c / v;
+        }
         if (operators.indexOf(operator) < 0) return;
-        if (!typeof unit === "number") return;
+        if (!typeof value === "number") return;
+        if (unitPattern.hasOwnProperty(unit) == false) return;
+        if (types.indexOf(type) < 0) return;
+        this.date = count(unitPattern[unit], operator, value);
+        return type == date ? new Date(this.date) : this.date;
     }
 }
 
