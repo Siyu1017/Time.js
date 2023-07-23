@@ -1,0 +1,24 @@
+{
+  "name": "time",
+  "version": "1.0.0",
+  "description": "一個輕量且簡單的 JavaScript 庫",
+  "main": "src/time.js",
+  "scripts": {
+    "test": "npm run"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Siyu1017/Time.js.git"
+  },
+  "keywords": [
+    "time",
+    "javascript",
+    "date"
+  ],
+  "author": "Siyu1017",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Siyu1017/Time.js/issues"
+  },
+  "homepage": "https://github.com/Siyu1017/Time.js#readme"
+}
