@@ -1,7 +1,7 @@
 /**
  * Code by Wetrain (c) 2023
  * All rights reserved.
- * Time.js v1.0.0
+ * Time.js v1.0.1
  */
 
 "use strict";
