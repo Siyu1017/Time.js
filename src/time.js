@@ -139,7 +139,7 @@ class Time {
         if (!typeof value === "number") return;
         if (unitPattern.hasOwnProperty(unit) == false) return;
         if (types.indexOf(type) < 0) return;
-        this.time = count(this.time, value, unitPattern[unit], operator);
+        this.time = count(new Date(this.time).getTime(), value, unitPattern[unit], operator);
         return type == "date" ? new Date(this.time) : this.time;
     }
 }
