@@ -130,6 +130,7 @@ class Time {
     operation(operator, unit, value) {
         const operators = ["+", "-", "*", "/", "%"];
         if (operators.indexOf(operator) < 0) return;
+        if (!typeof unit === "number") return;
     }
 }
 
