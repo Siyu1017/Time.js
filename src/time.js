@@ -64,9 +64,10 @@ const checkParamType = (value, type) => {
 4. value 類型是否正確 ( 依 type 分開檢查 )
 5. value 值是否合法 ( 依 type 分開檢查 )
 6. amount 
-
-
 */
+
+Date.prototype.format = function (fmt) { var o = { "M+": this.getMonth() + 1, "d+": this.getDate(), "h+": this.getHours(), "m+": this.getMinutes(), "s+": this.getSeconds(), "q+": Math.floor((this.getMonth() + 3) / 3), "S": this.getMilliseconds() }; if (/(y+)/.test(fmt)) { fmt = fmt.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length)); } for (var k in o) { if (new RegExp("(" + k + ")").test(fmt)) { fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length))); } } return fmt; }
+
 class Time {
     constructor(type, value, amount, unit) {
         if (!type || !value) return console.warn("Invalid argument.");
@@ -83,7 +84,7 @@ class Time {
             if (checkParamType(value, paramTypes["value"]) == false) return console.warn("Parameter value must be of type string or number.");
             if (new Date(value).toString() == "Invalid Date") return console.warn("Invalid datetime.");
 
-            this.date = value;
+            this.time = value;
             // 檢測完畢
         } else if (type == "word") {
             // 參數 type 為 word 時，為字串
@@ -110,11 +111,11 @@ class Time {
             }
 
             if (value == "tomorrow" || value == "yesterday") {
-                this.date = this.now() + wordPattern[value];
+                this.time = this.now() + wordPattern[value];
             } else if (value == "now") {
-                this.date = this.now();
+                this.time = this.now();
             } else {
-                this.date = this.now() + amount * unitPattern[unit] * operationPattern[value];
+                this.time = this.now() + amount * unitPattern[unit] * operationPattern[value];
             }
 
             // 檢測完畢
@@ -138,7 +139,7 @@ class Time {
         if (!typeof value === "number") return;
         if (unitPattern.hasOwnProperty(unit) == false) return;
         if (types.indexOf(type) < 0) return;
-        this.date = count(this.date, value, unitPattern[unit], operator);
-        return type == "date" ? new Date(this.date) : this.date;
+        this.time = count(this.time, value, unitPattern[unit], operator);
+        return type == "date" ? new Date(this.time) : this.time;
     }
 }

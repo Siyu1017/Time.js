@@ -7,25 +7,6 @@
 ### 建立
 
 ```js
-new Time("datetime", "1970/01/01 00:00:00");
-// 返回時間對象
-new Time("datetime", "1970-01-01 00:00:00");
-// 返回時間對象
-new Time("word", "now");
-// 返回現在時間
-new Time("word", "tomorrow");
-// 返回明天的這個時間點
-new Time("word", "yesterday");
-// 返回昨天的這個時間點
-new Time("word", "next", 1, "year");
-// 返回明天的這個時間點
-new Time("word", "last", 1, "year");
-// 返回去年的這個時間點
-```
-
-### 參數
-
-```js
 new Time(type, value, amount, unit);
 ```
 
@@ -47,3 +28,53 @@ new Time(type, value, amount, unit);
 參數 amount 選填，當參數 `value` 為 `next` 或 `last` 時才需填寫此屬性，須為數字 ( `Number` )
 
 參數 unit 選填，當參數 `value` 為 `next` 或 `last` 時才需填寫此屬性，須為字串 ( `String` )，屬性值：`second`、`minute`、`hour`、`day`、`week`、`month`、`season`、`year` 以及 `century`
+
+### 返回資料
+
+<em>
+
+```js
+{
+  time: "datetime or number"
+}
+```
+
+</em>
+
+### 運算
+
+```js
+new Time("datetime", "1970-01-01 00:00:00").operation(operator, unit, value, type);
+```
+
+| 參數名稱 | 必須 |   類型   |      屬性值      |
+|:-------:|:----:|:--------:|:---------------:|
+|`operator`| 是  | `String` | `+` `-` `*` `/` |
+|  `unit` |  是  | `String` |`second`、`minute`、`hour`、`day`、`week`、`month`、`season`、`year` 以及 `century`|
+| `value` |  是  | `Number` |       數字       |
+|  `type` |  否  | `String` |`date` ( 預設 ) 或 `number`|
+
+## 例子 
+
+```js
+new Time("datetime", "1970/01/01 00:00:00");
+// 返回時間對象
+new Time("datetime", "1970-01-01 00:00:00");
+// 返回時間對象
+new Time("word", "now");
+// 返回現在時間
+new Time("word", "tomorrow");
+// 返回明天的這個時間點
+new Time("word", "yesterday");
+// 返回昨天的這個時間點
+new Time("word", "next", 1, "year");
+// 返回明天的這個時間點
+new Time("word", "last", 1, "year");
+// 返回去年的這個時間點
+
+var time = new Time("word", "now");
+time.operation("+", "year", 1, "number");
+// 返回明年的這個時間點
+time.operation("+", "century", 1, "number");
+// 返回下個世紀的這個時間點
+```
