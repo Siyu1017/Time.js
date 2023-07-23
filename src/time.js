@@ -142,5 +142,3 @@ class Time {
         return type == date ? new Date(this.date) : this.date;
     }
 }
-
-export const Time = Time;
