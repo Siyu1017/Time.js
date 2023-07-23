@@ -128,7 +128,7 @@ class Time {
     operation(operator, unit, value, type = "date") {
         const operators = ["+", "-", "*", "/"];
         const types = ["date", "number"];
-        const conut = (v, o, c) => {
+        const count = (v, o, c) => {
             if (o == operators[0]) return c + v;
             if (o == operators[1]) return c - v;
             if (o == operators[2]) return c * v;
