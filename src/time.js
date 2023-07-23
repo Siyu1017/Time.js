@@ -6,7 +6,7 @@
 
 "use strict";
 
-const typePattern = ["word", "datetime"];
+const typePattern = ["word", "datetime"]; // "long"
 
 const valueWithWordPattern = ["now", "tomorrow", "yesterday", "next", "last"];
 
@@ -128,17 +128,17 @@ class Time {
     operation(operator, unit, value, type = "date") {
         const operators = ["+", "-", "*", "/"];
         const types = ["date", "number"];
-        const count = (v, o, c) => {
-            if (o == operators[0]) return c + v;
-            if (o == operators[1]) return c - v;
-            if (o == operators[2]) return c * v;
-            if (o == operators[3]) return c / v;
+        const count = (date, value, unit, operator) => {
+            if (operator == operators[0]) return date + unit * value;
+            if (operator == operators[1]) return date - unit * value;
+            if (operator == operators[2]) return date * unit * value;
+            if (operator == operators[3]) return date / unit * value;
         }
         if (operators.indexOf(operator) < 0) return;
         if (!typeof value === "number") return;
         if (unitPattern.hasOwnProperty(unit) == false) return;
         if (types.indexOf(type) < 0) return;
-        this.date = count(unitPattern[unit], operator, value);
-        return type == date ? new Date(this.date) : this.date;
+        this.date = count(this.date, value, unitPattern[unit], operator);
+        return type == "date" ? new Date(this.date) : this.date;
     }
 }
