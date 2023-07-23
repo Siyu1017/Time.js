@@ -132,6 +132,4 @@ class Time {
     }
 }
 
-module.exports = {
-    Time: Time
-}
+export const Time = Time;
